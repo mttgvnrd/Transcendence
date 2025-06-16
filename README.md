@@ -95,10 +95,10 @@ ft_transcendence/
 ## 📸 Screenshot
 
 ### 🖥️ Homepage
-![Homepage](./assets/screenshots/homepage.png)
+![Homepage](./screenshots/Home.png)
 
 ### 🏆 Lobby del Torneo
-![Lobby](./assets/screenshots/lobby.png)
+![Lobby](./screenshots/Torne.png)
 
 ### 🎮 Profile
-![Profile](./assets/screenshots/profile.png)
+![Profile](./screenshots/Profilo.png)
