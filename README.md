@@ -36,8 +36,8 @@
 Clona il repository:
 
 ```bash
-git clone https://github.com/tuousername/ft_transcendence.git
-cd ft_transcendence
+git clone https://github.com/mttgvnrd/Transcendence.git
+cd Transcendence
 ```
 
 Crea un file `.env` nella root del progetto con le seguenti variabili:
@@ -81,7 +81,7 @@ docker-compose up --build
 ## 📦 Struttura del Progetto
 
 ```
-ft_transcendence/
+Transcendence/
 ├── docker-compose.yml
 ├── docker-nginx/          # Configurazione e assets frontend
 ├── docker-django/         # Applicazione backend Django
