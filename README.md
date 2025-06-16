@@ -17,7 +17,7 @@
 
 ---
 
-## 🛠️ Stack Tecnologico
+## 🛠 Stack Tecnologico
 
 | Componente     | Tecnologia            |
 |----------------|------------------------|
@@ -27,22 +27,78 @@
 | **Cache**       | Redis                  |
 | **Web Server**  | Nginx                  |
 | **Container**   | Docker & Docker Compose |
-| **Blockchain**  | Node.js + Solidity su rete Ethereum testnet |
+| **Blockchain**  | Node.js + Solidity su testnet Ethereum |
 
 ---
 
-## 🧪 Requisiti
+## ⚙️ Configurazione
 
-- Docker & Docker Compose
-- Connessione a Internet per i test sulla blockchain
-
----
-
-## ▶️ Come Avviare il Progetto
-
-1. Clona il repository:
+Clona il repository:
 
 ```bash
-git clone https://github.com/mttgvnrd/Transcendence.git
+git clone https://github.com/tuousername/ft_transcendence.git
 cd ft_transcendence
+```
 
+Crea un file `.env` nella root del progetto con le seguenti variabili:
+
+```env
+POSTGRES_USER=your_postgres_user
+POSTGRES_PASSWORD=your_postgres_password
+POSTGRES_DB=transcendence_db
+REDIS_HOST=redis
+SECURE_SSL_REDIRECT=False
+CSRF_COOKIE_SECURE=False
+SESSION_COOKIE_SECURE=False
+DEBUG=True
+BLOCKCHAIN_SERVICE_TOKEN=your_token
+```
+
+Avvia i servizi con Docker Compose:
+
+```bash
+docker-compose up --build
+```
+
+---
+
+## 🌐 Accesso all'Applicazione
+
+- Frontend: [http://localhost:8443](http://localhost:8443)
+
+---
+
+## 🔐 Sicurezza
+
+- Implementazione HTTPS/SSL
+- Protezione CSRF
+- Autenticazione a due fattori (2FA)
+- ModSecurity WAF configurato su Nginx
+- Gestione sicura dei token con JWT
+
+---
+
+## 📦 Struttura del Progetto
+
+```
+ft_transcendence/
+├── docker-compose.yml
+├── docker-nginx/          # Configurazione e assets frontend
+├── docker-django/         # Applicazione backend Django
+├── docker-postgres/       # Configurazione database
+├── docker-blockchain/     # Servizio blockchain
+└── README.md
+```
+
+---
+
+## 📸 Screenshot
+
+### 🖥️ Homepage
+![Homepage](./assets/screenshots/homepage.png)
+
+### 🏆 Lobby del Torneo
+![Lobby](./assets/screenshots/lobby.png)
+
+### 🎮 Profile
+![Profile](./assets/screenshots/profile.png)
