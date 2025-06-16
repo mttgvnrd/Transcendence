@@ -1,0 +1,467 @@
+<div id="prova"class="container py-5" style="display: none;">
+	<div class="row justify-content-center">
+		<!-- Colonna sinistra: Immagine profilo e informazioni base -->
+		<div class="col-md-4">
+			<div class="card profile-card mb-4">
+				<div class="card-body text-center">
+					<div class="profile-image-container mb-3">
+						<img id="profileImage" src="/media/profile_pics/default.jpg" alt="Profile Image" class="rounded-circle img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
+						<div class="upload-overlay">
+							<label for="imageUpload" title="Cambia foto profilo">
+								<i class="fas fa-camera"></i>
+							</label>
+							<input type="file" id="imageUpload" style="display: none;" accept="image/*">
+						</div>
+					</div>
+					<h3 id="displayName" class="mb-1">Nome Utente</h3>
+					<p id="username" class="text-muted mb-2">@username</p>
+					<p id="userBio" class="text-muted mb-3">Bio dell'utente...</p>
+					<button id="editProfileBtn" class="btn btn-primary btn-sm">
+						<i class="fas fa-edit me-1"></i> Modifica Profilo
+					</button>
+				</div>
+			</div>
+			
+			<!-- Azioni account - spostato qui dalla colonna destra -->
+			<div class="card actions-card mb-4">
+				<div class="card-header">
+					<h5 class="mb-0"><i class="fas fa-cog me-2 text-primary"></i>Azioni Account</h5>
+				</div>
+				<div class="card-body">
+					<div class="d-grid gap-2">
+						<button id="twoFactorActionBtn" class="btn btn-primary btn-hover-effect">
+							<i class="fas fa-shield-alt me-1"></i> <span id="twoFactorBtnText">Configura 2FA</span>
+						</button>
+						<button id="downloadBackupCodesBtn" class="btn btn-outline-primary btn-hover-effect" style="display: none;">
+							<i class="fas fa-download me-1"></i> Scarica Codici di Backup
+						</button>
+						<button id="deleteAccountBtn" class="btn btn-outline-danger btn-hover-effect">
+							<i class="fas fa-trash-alt me-1"></i> Elimina Account
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Colonna destra: Statistiche e altre informazioni -->
+		<div class="col-md-8">
+			<!-- Statistiche di gioco -->
+			<div class="card stats-card mb-4">
+				<div class="card-header">
+					<h5 class="mb-0"><i class="fas fa-chart-bar me-2 text-primary"></i>Statistiche di Gioco</h5>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-3 text-center">
+							<h2 id="totalGames" class="text-primary">0</h2>
+							<p class="text-muted mb-0">Partite Totali</p>
+						</div>
+						<div class="col-md-3 text-center">
+							<h2 id="wins" class="text-success">0</h2>
+							<p class="text-muted mb-0">Vittorie</p>
+						</div>
+						<div class="col-md-3 text-center">
+							<h2 id="losses" class="text-danger">0</h2>
+							<p class="text-muted mb-0">Sconfitte</p>
+						</div>
+						<div class="col-md-3 text-center">
+							<h2 id="winRatio" class="text-info">0%</h2>
+							<p class="text-muted mb-0">Percentuale Vittorie</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Informazioni account -->
+			<div class="card info-card mb-4">
+				<div class="card-header">
+					<h5 class="mb-0"><i class="fas fa-user-cog me-2 text-primary"></i>Informazioni Account</h5>
+				</div>
+				<div class="card-body">
+					<div class="row mb-3">
+						<div class="col-md-6">
+							<p class="mb-1 text-muted">Email</p>
+							<p id="email" class="mb-0 fw-bold">user@example.com</p>
+						</div>
+						<div class="col-md-6">
+							<p class="mb-1 text-muted">Iscritto il</p>
+							<p id="dateJoined" class="mb-0 fw-bold">01/01/2023</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<p class="mb-1 text-muted">Autenticazione a due fattori</p>
+							<p id="twoFactorStatus" class="mb-0 fw-bold">Disabilitata</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Ultimi match -->
+			<div class="card matches-card mb-4">
+				<div class="card-header">
+					<h5 class="mb-0"><i class="fas fa-gamepad me-2 text-primary"></i>Ultimi Match</h5>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-hover match-history-table">
+							<thead>
+								<tr>
+									<th>Avversario</th>
+									<th>Risultato</th>
+									<th>Punteggio</th>
+									<th>Data</th>
+									<th>Tipo</th>
+								</tr>
+							</thead>
+							<tbody id="recentMatchesTableBody">
+								<!-- I dati verranno caricati dinamicamente -->
+								<tr class="text-center">
+									<td colspan="5">
+										<div class="py-3">
+											<i class="fas fa-spinner fa-spin me-2"></i>
+											Caricamento match recenti...
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal per modifica profilo -->
+<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="editProfileModalLabel">Modifica Profilo</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form id="editProfileForm">
+					<div class="mb-3">
+						<label for="editDisplayName" class="form-label">Nome visualizzato</label>
+						<input type="text" class="form-control" id="editDisplayName" name="display_name">
+					</div>
+					<div class="mb-3">
+						<label for="editBio" class="form-label">Bio</label>
+						<textarea class="form-control" id="editBio" name="bio" rows="3"></textarea>
+						<small class="text-muted">Massimo 500 caratteri</small>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+				<button type="button" id="saveProfileBtn" class="btn btn-primary">Salva</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.account-title {
+		font-weight: 700;
+		color: #333;
+	}
+	
+	.account-subtitle {
+		color: #666;
+		font-size: 1.2rem;
+	}
+	
+	.card {
+		border-radius: 15px;
+		transition: all 0.3s ease;
+		border: 2px solid rgba(0,0,0,0.08);
+		overflow: hidden;
+	}
+	
+	.profile-card:hover,
+	.stats-card:hover,
+	.info-card:hover,
+	.matches-card:hover,
+	.actions-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+		border-color: rgba(13, 110, 253, 0.3);
+	}
+	
+	.card-header {
+		background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+		border-bottom: 1px solid rgba(0,0,0,0.08);
+	}
+	
+	.profile-image-container {
+		position: relative;
+		width: 150px;
+		height: 150px;
+		margin: 0 auto;
+		border-radius: 50%;
+		overflow: hidden;
+		border: 4px solid #fff;
+		box-shadow: 0 0 15px rgba(0,0,0,0.1);
+		transition: all 0.3s ease;
+	}
+	
+	.profile-image-container:hover {
+		box-shadow: 0 0 20px rgba(13, 110, 253, 0.15);
+		border-color: rgba(13, 110, 253, 0.1);
+	}
+	
+	#profileImage {
+		width: 150px;
+		height: 150px;
+		object-fit: cover;
+		border-radius: 50%;
+		transition: all 0.3s ease;
+	}
+	
+	.upload-overlay {
+		position: absolute;
+		bottom: 10px;
+		right: 10px;
+		background: rgba(255, 255, 255, 0.9);
+		border-radius: 50%;
+		padding: 8px;
+		width: 35px;
+		height: 35px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+		transition: all 0.3s ease;
+		opacity: 0;
+	}
+	
+	.upload-overlay label {
+		margin: 0;
+		cursor: pointer;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.upload-overlay label i {
+		color: #0d6efd;
+		font-size: 1rem;
+	}
+	
+	.upload-overlay:hover {
+		transform: scale(1.1);
+		background: rgba(255, 255, 255, 1);
+	}
+	
+	.profile-image-container:hover .upload-overlay {
+		opacity: 1;
+	}
+	
+	.btn-hover-effect {
+		transition: all 0.3s ease;
+	}
+	
+	.btn-hover-effect:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+	}
+	
+	.table {
+		margin-bottom: 0;
+	}
+	
+	/* Stile per la tabella degli ultimi match */
+	.match-history-table {
+		border-collapse: separate;
+		border-spacing: 0 8px;
+		margin-top: -8px;
+	}
+	
+	.match-history-table thead th {
+		border: none;
+		color: #6c757d;
+		font-weight: 600;
+		padding: 10px 15px;
+	}
+	
+	.match-history-table tbody tr {
+		box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+		border-radius: 10px;
+		transition: all 0.2s ease;
+	}
+	
+	.match-history-table tbody tr:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+	}
+	
+	.match-history-table tbody td {
+		padding: 15px;
+		vertical-align: middle;
+		border: none;
+		background-color: #fff;
+	}
+	
+	.match-history-table tbody tr td:first-child {
+		border-top-left-radius: 10px;
+		border-bottom-left-radius: 10px;
+	}
+	
+	.match-history-table tbody tr td:last-child {
+		border-top-right-radius: 10px;
+		border-bottom-right-radius: 10px;
+	}
+	
+	/* Stili per i risultati delle partite */
+	.match-history-table .victory-row td {
+		background-color: rgba(25, 135, 84, 0.05);
+		border-top: 1px solid rgba(25, 135, 84, 0.1);
+		border-bottom: 1px solid rgba(25, 135, 84, 0.1);
+	}
+	
+	.match-history-table .victory-row td:first-child {
+		border-left: 3px solid #198754;
+	}
+	
+	.match-history-table .defeat-row td {
+		background-color: rgba(220, 53, 69, 0.05);
+		border-top: 1px solid rgba(220, 53, 69, 0.1);
+		border-bottom: 1px solid rgba(220, 53, 69, 0.1);
+	}
+	
+	.match-history-table .defeat-row td:first-child {
+		border-left: 3px solid #dc3545;
+	}
+	
+	.match-result {
+		font-weight: 600;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+	
+	.victory-result {
+		color: #198754;
+	}
+	
+	.defeat-result {
+		color: #dc3545;
+	}
+	
+	.match-abandoned {
+		position: relative;
+		top: -1px;
+		padding: 3px 8px;
+		font-size: 0.75rem;
+		border-radius: 20px;
+		font-weight: 600;
+		text-transform: uppercase;
+		background-color: #fd7e14;
+		color: white;
+	}
+	
+	.match-type {
+		background-color: rgba(13, 110, 253, 0.1);
+		padding: 4px 10px;
+		border-radius: 20px;
+		display: inline-block;
+		color: #0d6efd;
+		font-size: 0.85rem;
+		font-weight: 500;
+	}
+	
+	/* Stile per il modal 2FA */
+	.modal-custom {
+		border-radius: 15px;
+		overflow: hidden;
+		border: none;
+		box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+	}
+	
+	.modal-header {
+		background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+		border-bottom: 1px solid rgba(0,0,0,0.08);
+		padding: 1rem 1.5rem;
+	}
+	
+	.modal-title {
+		font-weight: 600;
+	}
+	
+	.custom-alert {
+		border-radius: 10px;
+		border-left: 4px solid;
+	}
+	
+	.alert-warning.custom-alert {
+		border-left-color: #ffc107;
+		background-color: rgba(255, 193, 7, 0.1);
+	}
+	
+	.alert-danger.custom-alert {
+		border-left-color: #dc3545;
+		background-color: rgba(220, 53, 69, 0.1);
+	}
+	
+	.verification-input {
+		font-size: 1.5rem;
+		letter-spacing: 0.25em;
+		font-weight: 500;
+		padding: 0.8rem;
+		border-radius: 10px;
+		transition: all 0.3s ease;
+	}
+	
+	.verification-input:focus {
+		border-color: #ffc107;
+		box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+	}
+</style>
+
+<script>
+	// Questa parte va aggiunta al tuo JavaScript esistente per creare la nuova renderizzazione
+	function renderMatchRow(match) {
+		const row = document.createElement('tr');
+		
+		// Applica classe in base al risultato
+		if (match.result === 'Vittoria') {
+			row.classList.add('victory-row');
+		} else {
+			row.classList.add('defeat-row');
+		}
+		
+		// Prepara l'HTML per il risultato con icona
+		let resultHTML = '';
+		if (match.result === 'Vittoria') {
+			resultHTML = `<span class="match-result victory-result">
+							<i class="fas fa-trophy"></i> Vittoria
+						  </span>`;
+		} else {
+			resultHTML = `<span class="match-result defeat-result">
+							<i class="fas fa-times-circle"></i> Sconfitta
+						  </span>`;
+		}
+		
+		// Aggiungi badge se la partita è stata abbandonata
+		if (match.abandoned) {
+			resultHTML += ` <span class="match-abandoned">Abbandonata</span>`;
+		}
+		
+		// Formatta il tipo di partita
+		const typeHTML = `<span class="match-type">${match.type}</span>`;
+		
+		row.innerHTML = `
+			<td><strong>${match.opponent}</strong></td>
+			<td>${resultHTML}</td>
+			<td>${match.score}</td>
+			<td>${match.date}</td>
+			<td>${typeHTML}</td>
+		`;
+		
+		return row;
+	}
+</script> 

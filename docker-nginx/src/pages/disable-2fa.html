@@ -1,0 +1,98 @@
+<div class="container py-5">
+	<div class="row justify-content-center">
+		<div class="col-md-8 col-lg-6">
+			<div class="card shadow-sm">
+				<div class="card-body p-4">
+					<div class="text-center mb-4">
+						<i class="fas fa-shield-alt fa-3x text-warning mb-3"></i>
+						<h2 class="card-title">Disattiva Autenticazione a Due Fattori</h2>
+					</div>
+
+					<div class="alert alert-warning custom-alert mb-4">
+						<i class="fas fa-exclamation-triangle me-2"></i>
+						<strong>Attenzione!</strong> Disattivando l'autenticazione a due fattori, il tuo account sarà meno protetto.
+					</div>
+
+					<div id="disable2FATokenSection">
+						<div class="form-group mb-4">
+							<label for="disable2FAToken" class="form-label">
+								<i class="fas fa-key text-primary me-2"></i>Codice di verifica dall'app:
+							</label>
+							<input type="text" class="form-control verification-input text-center" id="disable2FAToken" placeholder="000000" maxlength="6" autocomplete="off">
+						</div>
+					</div>
+
+					<div class="text-center mb-4">
+						<button type="button" id="useBackupCodeBtn" class="btn btn-link">
+							Non hai accesso all'app? Usa un codice di backup
+						</button>
+					</div>
+
+					<div id="disable2FABackupSection" style="display: none;">
+						<div class="form-group mb-4">
+							<label for="disable2FABackupCode" class="form-label">
+								<i class="fas fa-key text-primary me-2"></i>Codice di backup:
+							</label>
+							<input type="text" class="form-control verification-input text-center" id="disable2FABackupCode" placeholder="xxxx-xxxx-xxxx-xxxx" maxlength="19" autocomplete="off">
+						</div>
+						<div class="text-center mb-4">
+							<button type="button" id="useAuthAppBtn" class="btn btn-link">
+								Torna al codice dell'app
+							</button>
+						</div>
+					</div>
+
+					<div class="d-grid gap-2">
+						<button type="button" id="confirmDisable2FABtn" class="btn btn-warning btn-lg">
+							<i class="fas fa-shield-alt me-2"></i>Disattiva 2FA
+						</button>
+						<a href="/account" class="btn btn-outline-secondary btn-lg">
+							<i class="fas fa-arrow-left me-2"></i>Torna al Profilo
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+.verification-input {
+	font-size: 1.5rem;
+	letter-spacing: 0.25em;
+	font-weight: 500;
+	padding: 0.8rem;
+	border-radius: 10px;
+	transition: all 0.3s ease;
+}
+
+.verification-input:focus {
+	border-color: #ffc107;
+	box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+}
+
+.custom-alert {
+	border-radius: 10px;
+	border-left: 4px solid;
+}
+
+.alert-warning.custom-alert {
+	border-left-color: #ffc107;
+	background-color: rgba(255, 193, 7, 0.1);
+}
+
+.btn-lg {
+	padding: 1rem 1.5rem;
+	font-size: 1.1rem;
+}
+
+.btn:not(.btn-link) {
+	border-radius: 10px;
+	transition: all 0.3s ease;
+}
+
+.btn:not(.btn-link):hover {
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+</style> 

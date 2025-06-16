@@ -1,0 +1,201 @@
+<nav class="navbar navbar-expand-lg fixed-top">
+	<div class="container">
+		<a class="navbar-brand" href="/" data-route="home">
+			<i class="fas fa-table-tennis-paddle-ball me-2 brand-icon"></i>ft_transcendence
+		</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<!-- Pulsanti di navigazione a sinistra -->
+			<ul class="navbar-nav me-auto">
+				<li class="nav-item">
+					<a class="nav-link nav-hover-effect" href="/" data-route="home" data-bs-toggle="tooltip">
+						<i class="fas fa-home me-1"></i> Home
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link nav-hover-effect" href="/play" data-route="play" data-bs-toggle="tooltip">
+						<i class="fas fa-gamepad me-1"></i> Play
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link nav-hover-effect" href="/tournaments" data-route="tournaments" data-bs-toggle="tooltip">
+						<i class="fas fa-trophy me-1"></i> Tournaments
+					</a>
+				</li>
+                <li class="nav-item">
+                    <a class="nav-link nav-hover-effect" href="/friends" data-route="friends" data-bs-toggle="tooltip">
+                        <i class="fas fa-user-friends me-1"></i> Amici
+                    </a>
+                </li>
+				<li class="nav-item">
+					<a class="nav-link nav-hover-effect" href="/account" data-route="account" data-bs-toggle="tooltip">
+						<i class="fas fa-user me-1"></i> Account
+					</a>
+				</li>
+			</ul>
+			<!-- Pulsanti di autenticazione a destra -->
+			<ul class="navbar-nav">
+				<!-- Inizialmente nascosti, saranno mostrati da JavaScript in base all'autenticazione -->
+				<li class="nav-item auth-btn login-btn" style="display: none;">
+					<a class="nav-link btn btn-nav-login px-3 py-1 mt-1" href="/login" data-route="login">
+						<i class="fas fa-sign-in-alt me-1"></i> Login
+					</a>
+				</li>
+				<li class="nav-item auth-btn register-btn" style="display: none;">
+					<a class="nav-link btn btn-nav-register ms-2 px-3 py-1 mt-1" href="/register" data-route="register">
+						<i class="fas fa-user-plus me-1"></i> Register
+					</a>
+				</li>
+				<li class="nav-item auth-btn logout-btn" style="display: none;">
+					<a class="nav-link btn btn-nav-logout ms-2 px-3 py-1 mt-1" href="/logout" data-route="logout">
+						<i class="fas fa-sign-out-alt me-1"></i> Logout
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<style>
+    /* Stile navbar */
+    .navbar {
+        background-color: #ffffff;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        padding: 12px 0;
+    }
+    
+    .navbar-brand {
+        font-weight: 700;
+        color: #0d6efd;
+        font-size: 1.3rem;
+        transition: all 0.3s ease;
+    }
+    
+    .navbar-brand:hover {
+        color: #0a58ca;
+        transform: translateY(-2px);
+    }
+    
+    .brand-icon {
+        color: #0d6efd;
+        transition: transform 0.3s ease;
+    }
+    
+    .navbar-brand:hover .brand-icon {
+        transform: rotate(20deg);
+    }
+    
+    /* Stile dei link di navigazione */
+    .nav-link {
+        color: #495057;
+        font-weight: 500;
+        position: relative;
+        padding: 8px 12px;
+        margin: 0 2px;
+        transition: all 0.3s ease;
+        border-radius: 8px;
+    }
+    
+    .nav-hover-effect::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 50%;
+        background-color: #0d6efd;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+    }
+    
+    .nav-hover-effect:hover::after {
+        width: 80%;
+    }
+    
+    .nav-hover-effect:hover {
+        color: #0d6efd;
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+    
+    .nav-link.active {
+        color: #0d6efd;
+        background-color: rgba(13, 110, 253, 0.1);
+    }
+    
+    .nav-link.active::after {
+        width: 80%;
+    }
+    
+    /* Stile pulsanti di autenticazione */
+    .btn-nav-login, .btn-nav-register, .btn-nav-logout {
+        color: white;
+        font-weight: 500;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-nav-login {
+        background-color: #0d6efd;
+        border: none;
+    }
+    
+    .btn-nav-login:hover {
+        background-color: #0a58ca;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        color: white;
+    }
+    
+    .btn-nav-register {
+        background-color: #198754;
+        border: none;
+    }
+    
+    .btn-nav-register:hover {
+        background-color: #146c43;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        color: white;
+    }
+    
+    .btn-nav-logout {
+        background-color: #dc3545;
+        border: none;
+    }
+    
+    .btn-nav-logout:hover {
+        background-color: #bb2d3b;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        color: white;
+    }
+    
+    /* Stile navbar mobile */
+    @media (max-width: 991.98px) {
+        .navbar-collapse {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-top: 10px;
+        }
+        
+        .nav-hover-effect::after {
+            display: none;
+        }
+        
+        .nav-hover-effect:hover {
+            background-color: rgba(13, 110, 253, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .navbar-nav .nav-item {
+            margin-bottom: 5px;
+        }
+    }
+</style>

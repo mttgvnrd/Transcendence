@@ -1,0 +1,180 @@
+/* game_remote.css – pulito e autonomo */
+
+/* Layout principale del wrapper del gioco */
+#game-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto;
+	max-width: 1000px;
+}
+
+/* Score container a sinistra e destra */
+.score-container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.player-info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 45%;
+}
+
+#player1Name, #player2Name {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 10px;
+	color: white;
+}
+
+.score {
+	font-size: 48px;
+	font-weight: bold;
+	color: #6cbf8c;
+}
+
+/* Canvas e contenitori */
+#game-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+}
+
+#gameCanvas {
+	width: 1000px;
+	height: 500px;
+	display: block;
+	margin-bottom: 20px;
+	margin: 0;
+}
+
+#game-canvas-wrapper {
+	display: inline-block;
+	box-sizing: content-box;
+	padding: 0;
+	margin: 0;
+	border: none;
+	position: relative;
+}
+
+/* Countdown Timer */
+.countdown-timer {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 72px;
+	font-weight: bold;
+	color: #6cbf8c;
+	text-shadow: 0 0 10px rgba(108, 191, 140, 0.7);
+	z-index: 1000;
+	text-align: center;
+}
+
+/* Wrapper per il countdown (centrato al centro canvas) */
+#start-game-btn-wrapper {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1000;
+}
+
+/* Frecce opzionali */
+.arrow {
+	position: absolute;
+	width: 20px;
+	height: 40px;
+	background-color: #ff0;
+	transform-origin: center;
+}
+
+#playerArrow {
+	left: 50px;
+}
+
+#opponentArrow {
+	right: 50px;
+}
+
+/* Paddle aggiuntivi grafici (non canvas) */
+#playerPaddle {
+	left: 30px;
+}
+
+#opponentPaddle {
+	right: 30px;
+}
+
+/* Animazione paddle opzionale */
+@keyframes movePaddle {
+	0% { transform: translateY(0); }
+	50% { transform: translateY(-20px); }
+	100% { transform: translateY(0); }
+}
+
+/* Scoreboard fisso (es. usato in game.html) */
+#scoreboard {
+	position: absolute;
+	top: 400px;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	justify-content: space-between;
+	width: 1200px;
+	z-index: 9999;
+	background-color: transparent;
+}
+
+.score-box {
+	background-color: rgba(0, 0, 255, 0.6);
+	color: white;
+	padding: 10px;
+	font-size: 16px;
+	border-radius: 5px;
+	text-align: center;
+	width: 80px;
+	box-sizing: border-box;
+	border: 2px solid #fff;
+}
+
+/* Link immagini gioco (hover zoom) */
+.game-link img {
+	width: 200px;
+	height: auto;
+	border-radius: 10px;
+	transition: transform 0.3s ease-in-out;
+}
+
+.game-link img:hover {
+	transform: scale(1.1);
+}
+
+.game-controls {
+	margin-top: 20px;
+	padding: 15px;
+	background-color: #f5f5f5;
+	border-radius: 5px;
+	width: 100%;
+	text-align: center;
+}
+
+.controls-info {
+	margin: 0;
+	font-size: 16px;
+	line-height: 1.5;
+}
+
+#gameTitle {
+	text-align: center;
+	color: #6cbf8c;
+	margin-bottom: 20px;
+	font-size: 32px;
+}

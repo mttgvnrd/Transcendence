@@ -1,0 +1,82 @@
+services:
+  postgres:
+    build:
+      context: ./docker-postgres
+      dockerfile: Dockerfile
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    # environment:
+    #   - POSTGRES_USER=${POSTGRES_USER}
+    #   - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    #   - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - ft_transcendence
+  django:
+    build:
+      context: ./docker-django
+      dockerfile: Dockerfile
+    expose:
+      - "8000"
+      - "8443"
+    volumes:
+      - ./docker-django:/app
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - .env
+    # environment:
+    #   - REDIS_HOST=${REDIS_HOST}
+    #   - SECURE_SSL_REDIRECT=${SECURE_SSL_REDIRECT}
+    #   - CSRF_COOKIE_SECURE=${CSRF_COOKIE_SECURE}
+    #   - SESSION_COOKIE_SECURE=${SESSION_COOKIE_SECURE}
+    #   - DEBUG=${DEBUG}
+    networks:
+      - ft_transcendence
+  nginx:
+    build:
+      context: ./docker-nginx
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - ./docker-nginx/src:/usr/share/nginx/html
+    depends_on:
+      - django
+    networks:
+      - ft_transcendence
+  redis:
+    image: redis:6
+    ports:
+      - "6380:6379"
+    networks:
+      - ft_transcendence
+  blockchain:
+    build:
+      context: ./docker-blockchain
+      dockerfile: Dockerfile
+    working_dir: /app
+    command: ["npm", "run", "both"]
+    # environment:
+    #   - DJANGO_BASE_URL=http://django:8000
+    #   - BLOCKCHAIN_SERVICE_TOKEN=${BLOCKCHAIN_SERVICE_TOKEN}
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+      - django
+    networks:
+      - ft_transcendence
+
+volumes:
+  postgres_data:
+
+networks:
+  ft_transcendence:
+    driver: bridge  # Definisce una rete per la comunicazione tra i container

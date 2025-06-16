@@ -1,0 +1,263 @@
+<div id="prova" class="container-fluid game-container" style="display: none;">
+	<div class="row justify-content-center">
+		<div class="col-lg-10">
+			<div class="text-center mb-3">
+				<h2 class="game-title">Pong Game</h2>
+			</div>
+			
+			<div class="score-bar mb-2">
+				<div class="player-side">
+					<div class="player-avatar">
+						<i class="fas fa-user"></i>
+					</div>
+					<span id="player1Name" class="player-name">Giocatore 1</span>
+					<span id="playerScore" class="score-display">0</span>
+				</div>
+				<div class="timer-display">
+					<div class="vs-text">VS</div>
+				</div>
+				<div class="opponent-side">
+					<span id="opponentScore" class="score-display">0</span>
+					<span id="player2Name" class="player-name">AI</span>
+					<div class="player-avatar">
+						<i class="fas fa-robot"></i>
+					</div>
+				</div>
+			</div>
+			
+			<div class="game-area">
+				<div class="canvas-container">
+					<div id="game-container" class="position-relative">
+						<canvas id="gameCanvas" width="1000" height="500"></canvas>
+						
+						<!-- Ready button container with centered overlay -->
+						<div id="startOverlay" class="ready-overlay">
+							<div class="ready-content">
+								<button id="startGameButton" class="btn btn-primary ready-button">
+									<i class="fas fa-play"></i> Gioca Ora
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="controls-area mt-3">
+				<div class="row justify-content-center">
+					<div class="col-md-6 text-center">
+						<div class="control-info">
+							<span class="key-badge"><i class="fas fa-arrow-up"></i></span>
+							<span class="key-badge"><i class="fas fa-arrow-down"></i></span>
+							<span class="key-text">Usa le freccette direzionali per muovere la tua racchetta</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.game-container {
+		padding: 1rem 0;
+		height: calc(100vh - 60px); /* Assuming the navbar is about 60px */
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+	
+	.game-title {
+		font-weight: 700;
+		color: #333;
+		font-size: 2rem;
+		margin-bottom: 0.5rem;
+	}
+	
+	.score-bar {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		border-radius: 10px 10px 0 0;
+		padding: 10px 20px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		color: white;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	}
+	
+	.player-side, .opponent-side {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+	
+	.opponent-side {
+		flex-direction: row-reverse;
+	}
+	
+	.player-avatar {
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		background: white;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+		border: 2px solid rgba(255, 255, 255, 0.7);
+	}
+	
+	.player-avatar i {
+		font-size: 1.2rem;
+		color: #0d6efd;
+	}
+	
+	.player-name {
+		font-weight: 600;
+		font-size: 0.9rem;
+		white-space: nowrap;
+	}
+	
+	.score-display {
+		font-size: 1.8rem;
+		font-weight: 700;
+	}
+	
+	.vs-text {
+		font-size: 1.2rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+	}
+	
+	.game-area {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+	}
+	
+	.canvas-container {
+		width: 100%;
+		height: calc(100vh - 240px);
+		max-height: 550px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+		border-radius: 0 0 8px 8px;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+		background-color: transparent;
+	}
+	
+	#gameCanvas {
+		max-width: 100%;
+		max-height: 100%;
+		object-fit: contain;
+	}
+	
+	.controls-area {
+		padding: 10px 0;
+	}
+	
+	.ready-button {
+		padding: 1rem 3rem;
+		font-size: 1.4rem;
+		font-weight: 600;
+		transition: all 0.3s ease;
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+		border-radius: 2rem;
+		min-width: 200px;
+		background-color: #0d6efd;
+		border-color: #0d6efd;
+	}
+	
+	.ready-button:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+		background-color: #0b5ed7;
+		border-color: #0a58ca;
+	}
+	
+	.control-info {
+		display: inline-flex;
+		align-items: center;
+	}
+	
+	.key-badge {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		background-color: #333;
+		color: white;
+		width: 36px;
+		height: 36px;
+		border-radius: 4px;
+		margin: 0 2px;
+		box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+	}
+	
+	.key-text {
+		margin-left: 10px;
+		color: #555;
+		font-weight: 500;
+	}
+	
+	@media (max-width: 768px) {
+		.canvas-container {
+			height: calc(100vh - 280px);
+		}
+		
+		.score-display {
+			font-size: 1.5rem;
+		}
+		
+		.player-name {
+			font-size: 0.8rem;
+		}
+		
+		.ready-button {
+			padding: 0.8rem 2rem;
+			font-size: 1.2rem;
+		}
+	}
+
+	#game-container {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.ready-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(255, 255, 255, 0.9);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 100;
+		transition: opacity 0.5s ease-in-out;
+	}
+
+	.ready-overlay.game-started {
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.ready-content {
+		text-align: center;
+		padding: 2rem;
+		border-radius: 1rem;
+		background: rgba(255, 255, 255, 0.95);
+		box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		align-items: center;
+	}
+</style>

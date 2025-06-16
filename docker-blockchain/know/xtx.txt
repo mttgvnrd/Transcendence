@@ -1,0 +1,109 @@
+git branch
+git add . ||  git add foldername/
+git commit -m "Fanculo Panzone"
+git push
+psql -h localhost -p 5433 -U django -d django_db^
+
+
+
+git push --set-upstream origin gbarone /////for the first time im pushing
+
+
+chmod +x clean.sh
+./clean.sh
+
+npm install
+npx hardhat compile
+
+
+
+
+
+
+
+
+npm install --save-dev hardhat
+
+
+
+
+
+
+
+
+
+
+
+
+  blockchain:
+    build:
+      context: ./docker-blockchain
+      dockerfile: Dockerfile
+    working_dir: /app
+    command: ["npm", "run", "both"]
+    env_file:
+      - ./docker-blockchain/.env
+    volumes:
+      - ./docker-blockchain:/app
+    depends_on:
+      - postgres
+
+
+
+
+
+
+
+docker compose down -v --remove-orphans
+docker image prune -a
+docker compose up --build
+
+docker compose down -v --remove-orphans && docker image prune -a -f && docker compose up --build
+
+
+
+sudo lsof -i :5432
+sudo kill 1234
+
+
+npm install
+npx hardhat compile
+npm run deploy
+npm run sync
+npm run both
+
+conda activate mio_ambiente
+
+psql -U barone -d blockchain_test
+
+
+
+
+
+
+
+
+
+
+
+//to get balance do this command
+npx hardhat console --network sepolia
+
+and type this with the address of the account between " "
+
+const balance = await ethers.provider.getBalance("0x2507CBDF8e8bF14c6c286247454B831ab6b041b8");
+console.log(ethers.utils.formatEther(balance));
+//
+
+
+
+
+
+
+
+
+docker ps
+docker exec -it ft_transcendence-blockchain-1 sh
+
+ls -l BC_record.txt
+cat BC_record.txt

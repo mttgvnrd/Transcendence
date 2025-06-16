@@ -1,0 +1,224 @@
+<div class="container py-5">
+	<div class="row justify-content-center mb-4">
+		<div class="col-lg-8 text-center">
+			<h1 class="setup-title mb-3">Autenticazione a Due Fattori</h1>
+			<p class="setup-subtitle mb-4">Proteggi il tuo account con un livello aggiuntivo di sicurezza</p>
+		</div>
+	</div>
+
+	<div class="row justify-content-center">
+		<div class="col-lg-8">
+			<div class="card setup-card mb-4">
+				<div class="card-header">
+					<h5 class="mb-0 text-center"><i class="fas fa-shield-alt me-2 text-primary"></i>Configurazione 2FA</h5>
+				</div>
+				<div class="card-body p-4">
+					<div class="setup-steps">
+						<div class="step-item">
+							<h4 class="step-title">
+								<span class="step-number">1</span>Installa Google Authenticator
+							</h4>
+							<div class="step-content">
+								<p>Scarica e installa l'app Google Authenticator sul tuo dispositivo mobile:</p>
+								<div class="d-flex gap-3 mt-3">
+									<a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank" class="btn btn-outline-primary btn-hover-effect">
+										<i class="fab fa-google-play me-2"></i>Android
+									</a>
+									<a href="https://apps.apple.com/us/app/google-authenticator/id388497605" target="_blank" class="btn btn-outline-primary btn-hover-effect">
+										<i class="fab fa-apple me-2"></i>iOS
+									</a>
+								</div>
+							</div>
+						</div>
+						
+						<div class="step-item">
+							<h4 class="step-title">
+								<span class="step-number">2</span>Scansiona il Codice QR
+							</h4>
+							<div class="step-content">
+								<p>Apri l'app Google Authenticator e scansiona questo codice QR:</p>
+								<div class="qr-code-container">
+									<img id="qr-code" src="" alt="QR Code" class="qr-code" style="display: none;">
+									<div id="loading" class="spinner-border text-primary" role="status">
+										<span class="visually-hidden">Caricamento...</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="step-item">
+							<h4 class="step-title">
+								<span class="step-number">3</span>Verifica il Codice
+							</h4>
+							<div class="step-content">
+								<p>Inserisci il codice a 6 cifre mostrato nell'app Google Authenticator:</p>
+								<form id="verify-2fa-form" class="mt-3">
+									<input type="hidden" id="backup_codes" name="backup_codes" value="">
+									<div class="form-group mb-3">
+										<input type="text" class="form-control verification-input" id="token" name="token" 
+											   pattern="[0-9]{6}" maxlength="6" required
+											   placeholder="000000" autocomplete="off">
+									</div>
+									<button type="button" id="verify2faBtn" class="btn btn-primary btn-hover-effect">
+										<i class="fas fa-check-circle me-2"></i>Verifica il Codice
+									</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Backup Codes Card (hidden initially, shown after verification) -->
+			<div id="backup-codes-card" class="card backup-card mb-4" style="display: none;">
+				<div class="card-header">
+					<h5 class="mb-0"><i class="fas fa-key me-2 text-primary"></i>Codici di Backup</h5>
+				</div>
+				<div class="card-body p-4">
+					<div class="alert alert-warning">
+						<i class="fas fa-exclamation-triangle me-2"></i>
+						<strong>Importante!</strong> Salva questi codici di backup in un luogo sicuro. Potrai usarli per accedere al tuo account se perdi l'accesso al tuo dispositivo.
+					</div>
+					<div class="backup-codes mt-4">
+						<!-- I codici verranno inseriti qui dinamicamente -->
+					</div>
+					<div class="d-grid mt-3">
+						<button id="download-codes" class="btn btn-outline-primary btn-hover-effect">
+							<i class="fas fa-download me-2"></i>Scarica Codici di Backup
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.setup-title {
+		font-weight: 700;
+		color: #333;
+	}
+	
+	.setup-subtitle {
+		color: #666;
+		font-size: 1.2rem;
+	}
+	
+	.card {
+		border-radius: 15px;
+		transition: all 0.3s ease;
+		border: 2px solid rgba(0,0,0,0.08);
+		overflow: hidden;
+		box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+	}
+	
+	.setup-card:hover,
+	.backup-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+		border-color: rgba(13, 110, 253, 0.3);
+	}
+	
+	.card-header {
+		background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+		border-bottom: 1px solid rgba(0,0,0,0.08);
+	}
+	
+	.step-item {
+		margin-bottom: 2rem;
+		padding: 1.5rem;
+		background-color: #f8f9fa;
+		border-radius: 12px;
+		transition: all 0.3s ease;
+		border: 1px solid rgba(0,0,0,0.05);
+	}
+	
+	.step-item:hover {
+		box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+		transform: translateY(-3px);
+	}
+	
+	.step-number {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 35px;
+		height: 35px;
+		background-color: #0d6efd;
+		color: white;
+		border-radius: 50%;
+		margin-right: 1rem;
+		font-weight: 600;
+	}
+	
+	.step-title {
+		display: flex;
+		align-items: center;
+		margin-bottom: 1rem;
+		font-size: 1.25rem;
+		font-weight: 500;
+		color: #333;
+	}
+	
+	.step-content {
+		padding-left: 3.5rem;
+	}
+	
+	.qr-code-container {
+		background-color: #f8f9fa;
+		padding: 2rem;
+		border-radius: 12px;
+		margin: 1rem 0;
+		text-align: center;
+		border: 1px solid rgba(0,0,0,0.05);
+	}
+	
+	.qr-code {
+		max-width: 200px;
+		margin: 0 auto;
+		padding: 1rem;
+		background-color: white;
+		border-radius: 8px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	}
+	
+	.verification-input {
+		font-size: 1.5rem;
+		letter-spacing: 0.25em;
+		text-align: center;
+		font-weight: 500;
+		padding: 1rem;
+		border-radius: 10px;
+	}
+	
+	.btn-hover-effect {
+		transition: all 0.3s ease;
+	}
+	
+	.btn-hover-effect:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+	}
+	
+	.backup-codes {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 0.8rem;
+	}
+	
+	.backup-code {
+		font-family: monospace;
+		padding: 0.8rem;
+		background-color: #f8f9fa;
+		border-radius: 8px;
+		text-align: center;
+		border: 1px solid rgba(0,0,0,0.1);
+		font-weight: 600;
+		font-size: 1.1rem;
+		transition: all 0.2s ease;
+	}
+	
+	.backup-code:hover {
+		background-color: #e9ecef;
+	}
+</style>

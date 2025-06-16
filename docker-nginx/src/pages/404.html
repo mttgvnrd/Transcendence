@@ -1,0 +1,81 @@
+<div class="container py-5">
+	<div class="row justify-content-center mb-4">
+		<div class="col-lg-8 text-center">
+			<h1 class="error-title mb-3">Pagina Non Trovata</h1>
+			<p class="error-subtitle mb-4">La pagina che stai cercando non esiste o è stata spostata</p>
+		</div>
+	</div>
+	
+	<div class="row justify-content-center">
+		<div class="col-md-8">
+			<div class="card error-card">
+				<div class="card-body p-5 text-center">
+					<div class="error-icon mb-4">
+						<i class="fas fa-map-signs fa-5x text-danger"></i>
+					</div>
+					<h1 class="display-1 text-danger fw-bold mb-3">404</h1>
+					<h2 class="mb-3">Pagina non trovata</h2>
+					<p class="lead mb-4">Sembra che tu abbia preso una strada sbagliata. Torna alla home per ricominciare.</p>
+					<a href="/" data-route="home" class="btn btn-primary btn-lg btn-hover-effect">
+						<i class="fas fa-home me-2"></i>Torna alla Home
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.error-title {
+		font-weight: 700;
+		color: #333;
+		font-size: 2.5rem;
+	}
+	
+	.error-subtitle {
+		color: #666;
+		font-size: 1.2rem;
+	}
+	
+	.error-card {
+		border-radius: 15px;
+		transition: all 0.3s ease;
+		border: 2px solid rgba(0,0,0,0.08);
+		overflow: hidden;
+		box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+	}
+	
+	.error-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+		border-color: rgba(220, 53, 69, 0.3);
+	}
+	
+	.error-icon {
+		animation: drift 4s infinite;
+	}
+	
+	.btn-hover-effect {
+		transition: all 0.3s ease;
+	}
+	
+	.btn-hover-effect:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+	}
+	
+	@keyframes drift {
+		0% {
+			transform: translateX(0);
+		}
+		25% {
+			transform: translateX(-10px) rotate(-5deg);
+		}
+		75% {
+			transform: translateX(10px) rotate(5deg);
+		}
+		100% {
+			transform: translateX(0);
+		}
+	}
+</style> 

@@ -1,0 +1,113 @@
+<div class="container py-5">
+	<div class="row justify-content-center">
+		<div class="col-md-8 col-lg-6">
+			<div class="card shadow-sm">
+				<div class="card-body p-4">
+					<div class="text-center mb-4">
+						<i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+						<h2 class="card-title">Elimina Account</h2>
+					</div>
+
+					<div class="alert alert-danger custom-alert mb-4">
+						<i class="fas fa-exclamation-circle me-2"></i>
+						<strong>Attenzione!</strong> Questa azione è irreversibile.
+						<p class="mb-0 mt-2">
+							Tutti i tuoi dati, inclusi statistiche di gioco e progressi, verranno eliminati permanentemente.
+						</p>
+					</div>
+
+					<div id="twoFactorVerificationField" style="display: none;">
+						<div class="alert alert-info custom-alert mb-4">
+							<i class="fas fa-shield-alt me-2"></i>
+							È richiesta la verifica dell'autenticazione a due fattori.
+						</div>
+
+						<div id="deleteAccountTokenSection">
+							<div class="form-group mb-4">
+								<label for="twoFactorToken" class="form-label">
+									<i class="fas fa-key text-primary me-2"></i>Codice di verifica dall'app:
+								</label>
+								<input type="text" class="form-control verification-input text-center" id="twoFactorToken" placeholder="000000" maxlength="6" autocomplete="off">
+							</div>
+						</div>
+
+						<div class="text-center mb-4">
+							<button type="button" id="deleteAccountUseBackupBtn" class="btn btn-link">
+								Non hai accesso all'app? Usa un codice di backup
+							</button>
+						</div>
+
+						<div id="deleteAccountBackupSection" style="display: none;">
+							<div class="form-group mb-4">
+								<label for="deleteAccountBackupCode" class="form-label">
+									<i class="fas fa-key text-primary me-2"></i>Codice di backup:
+								</label>
+								<input type="text" class="form-control verification-input text-center" id="deleteAccountBackupCode" placeholder="xxxx-xxxx-xxxx-xxxx" maxlength="19" autocomplete="off">
+							</div>
+							<div class="text-center mb-4">
+								<button type="button" id="deleteAccountUseAuthBtn" class="btn btn-link">
+									Torna al codice dell'app
+								</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="d-grid gap-2">
+						<button type="button" id="confirmDeleteBtn" class="btn btn-danger btn-lg">
+							<i class="fas fa-trash-alt me-2"></i>Elimina Account Definitivamente
+						</button>
+						<a href="/account" class="btn btn-outline-secondary btn-lg">
+							<i class="fas fa-arrow-left me-2"></i>Torna al Profilo
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+.verification-input {
+	font-size: 1.5rem;
+	letter-spacing: 0.25em;
+	font-weight: 500;
+	padding: 0.8rem;
+	border-radius: 10px;
+	transition: all 0.3s ease;
+}
+
+.verification-input:focus {
+	border-color: #dc3545;
+	box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+}
+
+.custom-alert {
+	border-radius: 10px;
+	border-left: 4px solid;
+}
+
+.alert-danger.custom-alert {
+	border-left-color: #dc3545;
+	background-color: rgba(220, 53, 69, 0.1);
+}
+
+.alert-info.custom-alert {
+	border-left-color: #0dcaf0;
+	background-color: rgba(13, 202, 240, 0.1);
+}
+
+.btn-lg {
+	padding: 1rem 1.5rem;
+	font-size: 1.1rem;
+}
+
+.btn:not(.btn-link) {
+	border-radius: 10px;
+	transition: all 0.3s ease;
+}
+
+.btn:not(.btn-link):hover {
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+</style> 

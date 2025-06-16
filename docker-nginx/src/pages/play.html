@@ -1,0 +1,120 @@
+<div class="container py-5"">
+	<div class="row justify-content-center">
+		<div class="col-md-4 mb-4">
+			<a href="/game_ia" data-route="game_ia" class="card game-card h-100">
+				<div class="card-body text-center p-5">
+					<div class="game-icon-wrapper mb-4">
+						<i class="fas fa-robot fa-4x"></i>
+					</div>
+					<h3 class="card-title mb-3">Gioca contro l'IA</h3>
+					<p class="card-text">Allenati contro l'IA, attenzione non è facile!</p>
+				</div>
+				<div class="card-footer text-center border-0 bg-transparent">
+					<span class="btn btn-primary play-btn">
+						<i class="fas fa-play me-2"></i>Inizia Partita
+					</span>
+				</div>
+			</a>
+		</div>
+		
+		<div class="col-md-4 mb-4">
+			<a href="/game_local" data-route="game_local" class="card game-card h-100">
+				<div class="card-body text-center p-5">
+					<div class="game-icon-wrapper mb-4">
+						<i class="fas fa-users fa-4x"></i>
+					</div>
+					<h3 class="card-title mb-3">1 contro 1 (Locale)</h3>
+					<p class="card-text">Gioca contro un amico sullo stesso computer con controlli separati</p>
+				</div>
+				<div class="card-footer text-center border-0 bg-transparent">
+					<span class="btn btn-primary play-btn">
+						<i class="fas fa-play me-2"></i>Inizia Partita
+					</span>
+				</div>
+			</a>
+		</div>
+		
+		<div class="col-md-4 mb-4">
+			<a href="/game-remote" data-route="game-remote" class="card game-card h-100">
+				<div class="card-body text-center p-5">
+					<div class="game-icon-wrapper mb-4">
+						<i class="fas fa-globe fa-4x"></i>
+					</div>
+					<h3 class="card-title mb-3">1 contro 1 (Online)</h3>
+					<p class="card-text">Competi con altri giocatori online in partite in tempo reale</p>
+				</div>
+				<div class="card-footer text-center border-0 bg-transparent">
+					<span class="btn btn-primary play-btn">
+						<i class="fas fa-play me-2"></i>Inizia Partita
+					</span>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
+
+<style>
+	.play-title {
+		font-weight: 700;
+		color: #333;
+	}
+	
+	.play-subtitle {
+		color: #666;
+		font-size: 1.2rem;
+	}
+	
+	.game-card {
+		border-radius: 15px;
+		transition: all 0.3s ease;
+		text-decoration: none;
+		color: #333;
+		border: 2px solid rgba(0,0,0,0.08);
+		overflow: hidden;
+	}
+	
+	.game-card:hover {
+		transform: translateY(-10px);
+		box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+		border-color: #0d6efd;
+		color: #333;
+	}
+	
+	.game-icon-wrapper {
+		height: 100px;
+		width: 100px;
+		margin: 0 auto;
+		border-radius: 50%;
+		background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.3s ease;
+	}
+	
+	.game-card:hover .game-icon-wrapper {
+		transform: scale(1.1);
+		background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+	}
+	
+	.fa-robot, .fa-users, .fa-globe {
+		color: #0d6efd;
+		transition: all 0.3s ease;
+	}
+	
+	.game-card:hover .fa-robot,
+	.game-card:hover .fa-users,
+	.game-card:hover .fa-globe {
+		color: #0a58ca;
+	}
+	
+	.play-btn {
+		transition: all 0.3s ease;
+		opacity: 0.9;
+	}
+	
+	.game-card:hover .play-btn {
+		opacity: 1;
+		transform: scale(1.05);
+	}
+</style>

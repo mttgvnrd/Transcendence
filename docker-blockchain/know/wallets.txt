@@ -1,0 +1,44 @@
+0x5C16c99746717A5eC7869EA6a00E08f36d6e214E 0.224375298327006801
+0xC57c93D80Fc59Ca58Ea5B7628e07dC7d1Af89926 0.1
+0x2507CBDF8e8bF14c6c286247454B831ab6b041b8 0.172328671803821402
+0xF586ed119e8c1ECb0B6B711cFcE6371C35727c9A 0.143191192380779083 ETH
+
+
+/////https://sepolia.etherscan.io/address/0xf17FD60A42487EE126c58B3eE828af10C9425654
+
+//
+Address: 0xC57c93D80Fc59Ca58Ea5B7628e07dC7d1Af89926    0.029
+Private Key: 0x5ffae903630a2a4e67aa9f7d8e813b6d69291e298b632eb68ae15b67a7721705
+Mnemonic: still witness pride retire write bulb pistol duty dad rally comfort eagle
+//
+
+
+
+//
+🚀 New Ethereum Wallet Generated:
+Address: 0x2507CBDF8e8bF14c6c286247454B831ab6b041b8     0.0288
+Private Key: 0x15e896fad61b1fa34c5a9574cc68c4664e4f6b803a7aa196cf5f29e24ae94998
+Mnemonic: width business bonus moon cargo harvest van paddle space flash lazy jaguar
+//
+
+
+
+
+
+
+Account senza ETH
+//
+🚀 New Ethereum Wallet Generated:
+Address: 0xF586ed119e8c1ECb0B6B711cFcE6371C35727c9A      0.077
+Private Key: 0x578a8e249b6f71ee32061a7329f95ed269b16b3e2fbfd4cc496f80c985a01613
+Mnemonic: inspire rent ride raccoon monitor you insect balance kangaroo vault current first
+//
+
+
+
+//
+🚀 New Ethereum Wallet Generated: 0.044505749605605962
+Address: 0x5C16c99746717A5eC7869EA6a00E08f36d6e214E
+Private Key: 0xebe99daceae6710335166a53f0ecc914239f4764482e40da09c56ff28aac7c20
+Mnemonic: kit occur own drum dilemma around exist ski rent law enroll enough
+//

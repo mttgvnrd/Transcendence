@@ -1,0 +1,131 @@
+<div class="container py-5">
+	<div class="row justify-content-center mb-4">
+		<div class="col-lg-6 text-center">
+			<h1 class="register-title mb-3">Crea Account</h1>
+			<p class="register-subtitle mb-4">Registrati per iniziare a giocare a Pong</p>
+		</div>
+	</div>
+
+	<div class="row justify-content-center">
+		<div class="col-md-5">
+			<div class="card register-card">
+				<div class="card-header">
+					<h5 class="mb-0 text-center"><i class="fas fa-user-plus me-2 text-primary"></i>Registrazione</h5>
+				</div>
+				<div class="card-body p-4">
+					<form id="registrationForm">
+						<div class="mb-3">
+							<label for="username" class="form-label">
+								<i class="fas fa-user text-primary me-2"></i>Username:
+							</label>
+							<input type="text" class="form-control" id="username" name="username" required>
+						</div>
+						
+						<div class="mb-3">
+							<label for="email" class="form-label">
+								<i class="fas fa-envelope text-primary me-2"></i>Email:
+							</label>
+							<input type="email" class="form-control" id="email" name="email" required>
+						</div>
+						
+						<div class="mb-3">
+							<label for="password" class="form-label">
+								<i class="fas fa-lock text-primary me-2"></i>Password:
+							</label>
+							<input type="password" class="form-control" id="password" name="password" required>
+						</div>
+						
+						<div class="mb-4">
+							<label for="confirmPassword" class="form-label">
+								<i class="fas fa-check-circle text-primary me-2"></i>Conferma Password:
+							</label>
+							<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+						</div>
+						
+						<div id="errorMessage" class="alert alert-danger" style="display: none; white-space: pre-line;"></div>
+						
+						<button type="submit" class="btn btn-primary w-100 btn-hover-effect mt-3">
+							<i class="fas fa-user-plus me-2"></i>Registrati
+						</button>
+						
+						<div class="text-center mt-3">
+							<a href="/login" data-route="login" class="link-hover-effect">Hai già un account? Accedi</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.register-title {
+		font-weight: 700;
+		color: #333;
+	}
+	
+	.register-subtitle {
+		color: #666;
+		font-size: 1.2rem;
+	}
+	
+	.card {
+		border-radius: 15px;
+		transition: all 0.3s ease;
+		border: 2px solid rgba(0,0,0,0.08);
+		overflow: hidden;
+		box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+	}
+	
+	.register-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+		border-color: rgba(13, 110, 253, 0.3);
+	}
+	
+	.card-header {
+		background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+		border-bottom: 1px solid rgba(0,0,0,0.08);
+	}
+	
+	.btn-hover-effect {
+		transition: all 0.3s ease;
+	}
+	
+	.btn-hover-effect:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+	}
+	
+	.link-hover-effect {
+		color: #0d6efd;
+		text-decoration: none;
+		transition: all 0.2s ease;
+	}
+	
+	.link-hover-effect:hover {
+		color: #0a58ca;
+		text-decoration: underline;
+	}
+	
+	.form-control {
+		padding: 10px 15px;
+		border-radius: 10px;
+		border: 1px solid #ced4da;
+		transition: all 0.2s ease;
+	}
+	
+	.form-control:focus {
+		border-color: #0d6efd;
+		box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+	}
+	
+	.container-signin {
+		width: 100%;
+		padding-right: var(--bs-gutter-x, 0.75rem);
+		padding-left: var(--bs-gutter-x, 0.75rem);
+		margin-right: auto;
+		margin-left: auto;
+	}
+</style>
+<!-- Lo script viene caricato dinamicamente in main.js -->

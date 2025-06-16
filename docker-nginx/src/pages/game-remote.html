@@ -1,0 +1,300 @@
+<div id="prova" class="container-fluid game-container">
+	<div class="row justify-content-center">
+		<div class="col-lg-10">
+			<div class="text-center mb-3">
+				<h2 class="game-title">Pong Game</h2>
+			</div>
+			
+			<div class="score-bar mb-2">
+				<div class="player-side">
+					<div class="player-avatar">
+						<i class="fas fa-user"></i>
+					</div>
+					<div class="player-text">
+						<span id="player1Name" class="player-name">Giocatore 1</span>
+						<span id="player1Score" class="score-display">0</span>
+					</div>
+				</div>
+				<div class="timer-display">
+					<div class="vs-text">VS</div>
+				</div>
+				<div class="opponent-side">
+					<div class="player-text">
+						<span id="player2Name" class="player-name">Giocatore 2</span>
+						<span id="player2Score" class="score-display">0</span>
+					</div>
+					<div class="player-avatar">
+						<i class="fas fa-user"></i>
+					</div>
+				</div>
+			</div>
+			
+			<div class="game-area">
+				<div class="canvas-container">
+					<!-- Preserving data attributes for functionality -->
+					<div id="game-container" data-game-id="{{ game_id }}" data-game-mode="remote">
+						<!-- WRAPPER CON BORDO E LINEA CENTRALE -->
+						<div id="game-canvas-wrapper">
+							<canvas id="gameCanvas" style="background-color: white;"></canvas>
+						</div>
+
+						<!-- Elementi grafici extra - Arrow e paddle (eventualmente stilizzati via JS o CSS) -->
+						<div id="paddle_left" class="paddle"></div>
+						<div id="paddle_right" class="paddle"></div>
+						
+						<div id="player1ArrowUp" class="arrow" style="display: none;"></div>
+						<div id="player1ArrowDown" class="arrow" style="display: none;"></div>
+						<div id="player2ArrowUp" class="arrow" style="display: none;"></div>
+						<div id="player2ArrowDown" class="arrow" style="display: none;"></div>
+
+						<!-- Ready button container with centered overlay -->
+						<div id="readyOverlay" class="ready-overlay">
+							<div class="ready-content">
+								<h3 class="waiting-text">In attesa dei giocatori...</h3>
+								<button id="readyButton" class="btn btn-primary ready-button">
+									<i class="fas fa-check"></i> Pronto
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.game-container {
+		padding: 1rem 0;
+		height: calc(100vh - 60px); /* Assuming the navbar is about 60px */
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		transition: all 0.5s ease-in-out;
+	}
+	
+	.game-title {
+		font-weight: 700;
+		color: #333;
+		font-size: 2rem;
+		margin-bottom: 0.5rem;
+	}
+	
+	.score-bar {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		border-radius: 10px 10px 0 0;
+		padding: 10px 20px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		color: white;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	}
+	
+	.player-side, .opponent-side {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+	
+	.opponent-side {
+		flex-direction: row-reverse;
+	}
+	
+	.player-avatar {
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		background: white;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+		border: 2px solid rgba(255, 255, 255, 0.7);
+	}
+	
+	.player-avatar i {
+		font-size: 1.2rem;
+		color: #0d6efd;
+	}
+	
+	.player-text {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		height: 40px; /* altezza uguale all'avatar */
+	}
+	
+	.player-name {
+		font-weight: 600;
+		font-size: 0.9rem;
+		white-space: nowrap;
+		color: white;
+		line-height: normal;
+		display: flex;
+		align-items: center;
+	}
+	
+	.score-display {
+		font-size: 1.8rem;
+		font-weight: 700;
+		line-height: normal;
+		display: flex;
+		align-items: center;
+	}
+	
+	.vs-text {
+		font-size: 1.2rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+	}
+	
+	.game-area {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+	}
+	
+	.canvas-container {
+		width: 100%;
+		height: calc(100vh - 240px);
+		max-height: 550px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+		border-radius: 0 0 8px 8px;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+		background-color: transparent;
+	}
+	
+	#game-container {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	#game-canvas-wrapper {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: white;
+	}
+	
+	#gameCanvas {
+		max-width: 100%;
+		max-height: 100%;
+		object-fit: contain;
+	}
+	
+	.paddle {
+		position: absolute;
+	}
+	
+	.arrow {
+		position: absolute;
+	}
+	
+	.ready-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(255, 255, 255, 0.9);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 100;
+		transition: opacity 0.5s ease-in-out;
+	}
+
+	.ready-overlay.game-started {
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.ready-content {
+		text-align: center;
+		padding: 2rem;
+		border-radius: 1rem;
+		background: rgba(255, 255, 255, 0.95);
+		box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		align-items: center;
+	}
+
+	.waiting-text {
+		color: #1a2a4a;
+		font-size: 1.5rem;
+		margin: 0;
+		font-weight: 600;
+	}
+
+	.ready-button {
+		padding: 1rem 3rem;
+		font-size: 1.4rem;
+		font-weight: 600;
+		transition: all 0.3s ease;
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+		border-radius: 2rem;
+		min-width: 200px;
+	}
+
+	.ready-button:not(:disabled):hover {
+		transform: translateY(-2px);
+		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+	}
+
+	.ready-button.ready {
+		background-color: #198754;
+		border-color: #198754;
+		cursor: not-allowed;
+	}
+
+	.ready-button.ready:hover {
+		background-color: #198754;
+		border-color: #198754;
+	}
+
+	.game-container.game-active {
+		padding: 0;
+	}
+
+	.game-container.game-active .score-bar {
+		border-radius: 0;
+	}
+
+	@media (max-width: 768px) {
+		.canvas-container {
+			height: calc(100vh - 280px);
+		}
+		
+		.score-display {
+			font-size: 1.5rem;
+		}
+		
+		.player-name {
+			font-size: 0.8rem;
+		}
+		
+		.ready-button {
+			padding: 0.8rem 2rem;
+			font-size: 1.2rem;
+		}
+
+		.waiting-text {
+			font-size: 1.2rem;
+		}
+	}
+</style>

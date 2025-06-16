@@ -1,0 +1,264 @@
+<div id="prova" class="container py-5" style="display: none;">    
+	<div class="row justify-content-center">
+		<!-- Form to Create a New Tournament -->
+		<div class="col-lg-6 mb-4">
+			<div class="card tournament-card h-100">
+				<div class="card-header">
+					<h5 class="mb-0"><i class="fas fa-plus-circle me-2 text-primary"></i>Crea un Nuovo Torneo</h5>
+				</div>
+				<div class="card-body p-4">
+					<form method="POST" id="tournament-form">
+						<!-- Hidden CSRF token field -->
+						<input type="hidden" name="csrftoken" id="csrftoken" value="">
+						
+						<div class="form-group mb-3">
+							<label for="id_name" class="form-label">
+								<i class="fas fa-trophy me-2 text-primary"></i>Nome del Torneo
+							</label>
+							<div class="input-group">
+								<span class="input-group-text">
+									<i class="fas fa-trophy"></i>
+								</span>
+								<input type="text" name="name" id="id_name" class="form-control" required>
+							</div>
+							<div class="text-danger mt-1 name-error" style="display: none;"></div>
+						</div>
+						
+						<div class="form-group mb-3">
+							<label for="id_max_participants" class="form-label">
+								<i class="fas fa-users me-2 text-primary"></i>Numero di Partecipanti
+							</label>
+							<div class="input-group">
+								<span class="input-group-text">
+									<i class="fas fa-hashtag"></i>
+								</span>
+								<select name="max_participants" id="id_max_participants" class="form-select">
+									<option value="4">4</option>
+									<option value="8">8</option>
+									<option value="16">16</option>
+								</select>
+							</div>
+							<div class="text-danger mt-1 max-participants-error" style="display: none;"></div>
+						</div>
+
+						<p class="text-muted mb-3">Una volta creato, altri giocatori potranno unirsi al tuo torneo fino al raggiungimento del limite massimo.</p>
+
+						<button type="submit" class="btn btn-primary btn-lg mt-4 w-100 d-flex align-items-center justify-content-center btn-hover-effect">
+							<i class="fas fa-trophy me-2"></i>Crea Torneo
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- List of Tournaments -->
+		<div class="col-lg-6 mb-4">
+			<div class="card tournament-list-card h-100">
+				<div class="card-header">
+					<ul class="nav nav-tabs card-header-tabs" id="tournamentTabs" role="tablist">
+						<li class="nav-item" role="presentation">
+							<button class="nav-link active" id="registration-tab" data-bs-toggle="tab" data-bs-target="#registration" type="button" role="tab" aria-controls="registration" aria-selected="true">
+								<i class="fas fa-user-plus me-2 text-primary"></i>Iscrizioni Aperte
+							</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="ongoing-tab" data-bs-toggle="tab" data-bs-target="#ongoing" type="button" role="tab" aria-controls="ongoing" aria-selected="false">
+								<i class="fas fa-play-circle me-2 text-primary"></i>In Corso
+							</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="completed-tab" data-bs-toggle="tab" data-bs-target="#completed" type="button" role="tab" aria-controls="completed" aria-selected="false">
+								<i class="fas fa-check-circle me-2 text-primary"></i>Completati
+							</button>
+						</li>
+					</ul>
+				</div>
+				<div class="card-body p-0">
+					<div class="tab-content" id="tournamentTabsContent">
+						<!-- Registration Open Tournaments -->
+						<div class="tab-pane fade show active" id="registration" role="tabpanel" aria-labelledby="registration-tab">
+							<div class="tournament-list-section" id="registration-tournaments-list">
+								<!-- Registration tournaments will be loaded here dynamically -->
+								<div class="text-center py-5" id="no-registration-tournaments-message">
+									<i class="fas fa-user-plus fa-3x mb-3 text-muted"></i>
+									<p class="text-muted">Non ci sono tornei aperti per le iscrizioni.</p>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Ongoing Tournaments -->
+						<div class="tab-pane fade" id="ongoing" role="tabpanel" aria-labelledby="ongoing-tab">
+							<div class="tournament-list-section" id="ongoing-tournaments-list">
+								<!-- Ongoing tournaments will be loaded here dynamically -->
+								<div class="text-center py-5" id="no-ongoing-tournaments-message">
+									<i class="fas fa-play-circle fa-3x mb-3 text-muted"></i>
+									<p class="text-muted">Non ci sono tornei in corso al momento.</p>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Completed Tournaments -->
+						<div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
+							<div class="tournament-list-section" id="completed-tournaments-list">
+								<!-- Completed tournaments will be loaded here dynamically -->
+								<div class="text-center py-5" id="no-completed-tournaments-message">
+									<i class="fas fa-trophy fa-3x mb-3 text-muted"></i>
+									<p class="text-muted">Non ci sono tornei completati.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.tournament-title {
+		font-weight: 700;
+		color: #333;
+	}
+	
+	.tournament-subtitle {
+		color: #666;
+		font-size: 1.2rem;
+	}
+	
+	.card {
+		border-radius: 15px;
+		transition: all 0.3s ease;
+		border: 2px solid rgba(0,0,0,0.08);
+		overflow: hidden;
+	}
+	
+	.tournament-card:hover,
+	.tournament-list-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+		border-color: rgba(13, 110, 253, 0.3);
+	}
+	
+	.card-header {
+		background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+		border-bottom: 1px solid rgba(0,0,0,0.08);
+	}
+	
+	.nav-tabs .nav-link {
+		border: none;
+		color: #495057;
+		font-weight: 500;
+		padding: 12px 16px;
+		transition: all 0.2s ease;
+	}
+	
+	.nav-tabs .nav-link:hover {
+		background-color: rgba(13, 110, 253, 0.05);
+	}
+	
+	.nav-tabs .nav-link.active {
+		color: #0d6efd;
+		background-color: transparent;
+		border-bottom: 2px solid #0d6efd;
+	}
+	
+	.tournament-list-section {
+		padding: 15px;
+	}
+	
+	.btn-hover-effect {
+		transition: all 0.3s ease;
+	}
+	
+	.btn-hover-effect:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+	}
+	
+	.input-group-text {
+		background-color: #f8f9fa;
+		border-color: #ced4da;
+	}
+	
+	/* Stile per gli elementi nella lista dei tornei */
+	.tournament-item {
+		background-color: #fff;
+		border-radius: 12px;
+		border: 1px solid rgba(0,0,0,0.1);
+		padding: 15px;
+		margin-bottom: 15px;
+		transition: all 0.3s ease;
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.tournament-item:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+	}
+	
+	.tournament-item .tournament-name {
+		font-weight: 600;
+		font-size: 1.1rem;
+		margin-bottom: 8px;
+		color: #333;
+	}
+	
+	.tournament-item .tournament-details {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 12px;
+	}
+	
+	.tournament-item .tournament-status {
+		display: inline-block;
+		padding: 3px 10px;
+		border-radius: 20px;
+		font-size: 0.8rem;
+		font-weight: 500;
+	}
+	
+	.tournament-item .status-registration {
+		background-color: rgba(25, 135, 84, 0.1);
+		color: #198754;
+	}
+	
+	.tournament-item .status-ongoing {
+		background-color: rgba(13, 110, 253, 0.1);
+		color: #0d6efd;
+	}
+	
+	.tournament-item .status-completed {
+		background-color: rgba(108, 117, 125, 0.1);
+		color: #6c757d;
+	}
+	
+	.tournament-item .tournament-action {
+		margin-top: auto;
+	}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+	const numSelect = document.getElementById('id_max_participants');
+	
+	// Update page when selection changes
+	numSelect.addEventListener('change', function() {
+		const selectedValue = this.value;
+		window.location.href = `?max_participants=${selectedValue}`;
+	});
+	
+	// Set current value from GET parameter
+	const urlParams = new URLSearchParams(window.location.search);
+	const currentNum = urlParams.get('max_participants');
+	if (currentNum) {
+		numSelect.value = currentNum;
+	}
+	
+	// Enable Bootstrap tooltips
+	const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+	tooltipTriggerList.map(function (tooltipTriggerEl) {
+		return new bootstrap.Tooltip(tooltipTriggerEl);
+	});
+});
+</script>

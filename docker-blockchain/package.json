@@ -1,0 +1,23 @@
+{
+	"name": "blockchain-score",
+	"version": "1.0.0",
+	"scripts": {
+		"deploy": "./node_modules/.bin/hardhat run scripts/deploy.js --network sepolia",
+		"sync": "./node_modules/.bin/hardhat run scripts/sync_matches.js --network sepolia",
+		"wallet": "node scripts/generate-wallet.js",
+		"both": "npm run deploy && npm run sync"
+	},
+	"dependencies": {
+		"@nomicfoundation/hardhat-toolbox": "^2.0.2",
+		"dotenv": "^16.0.3",
+		"express": "^4.18.2",
+		"pg": "^8.14.1",
+		"sqlite3": "^5.1.7",
+		"axios": "^1.6.7"
+	},
+	"devDependencies": {
+		"@nomiclabs/hardhat-ethers": "^2.2.3",
+		"ethers": "^5.7.2",
+		"hardhat": "^2.23.0"
+	}
+}

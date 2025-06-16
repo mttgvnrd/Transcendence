@@ -1,0 +1,282 @@
+<div id="prova" class="container py-5" style="display: none;">
+	<!-- My Friends Card -->
+	<div class="row justify-content-center">
+		<div class="col-lg-10 mb-4">
+			<div class="card friends-card">
+				<div class="card-header">
+					<h5 class="mb-0"><i class="fas fa-user-friends me-2 text-primary"></i>I Miei Amici</h5>
+				</div>
+				<div class="card-body p-4">
+					<div class="row" id="friends-list">
+						<!-- Friends will be loaded here dynamically -->
+						<div class="col-12 text-center" id="no-friends-message">
+							<div class="empty-state py-4">
+								<i class="fas fa-users fa-3x mb-3 text-muted"></i>
+								<p class="text-muted">Non hai ancora amici. Inizia cercando altri utenti!</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Search Users Card -->
+		<div class="col-lg-10 mb-4">
+			<div class="card search-card">
+				<div class="card-header">
+					<h5 class="mb-0"><i class="fas fa-search me-2 text-primary"></i>Cerca Utenti</h5>
+				</div>
+				<div class="card-body p-4">
+					<div class="row mb-4">
+						<div class="col-md-8 mx-auto">
+							<div class="input-group">
+								<input type="text" id="search-input" class="form-control" placeholder="Inserisci username...">
+								<button class="btn btn-primary btn-hover-effect" type="button" id="search-button">
+									<i class="fas fa-search me-2"></i>Cerca
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="row" id="search-results">
+						<!-- Search results will be displayed here -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Friend Requests Card -->
+		<div class="col-lg-10 mb-4">
+			<div class="card requests-card">
+				<div class="card-header">
+					<h5 class="mb-0"><i class="fas fa-user-plus me-2 text-primary"></i>Richieste di Amicizia</h5>
+				</div>
+				<div class="card-body p-4">
+					<div class="row" id="friend-requests-list">
+						<!-- Friend requests will be loaded here dynamically -->
+						<div class="col-12 text-center" id="no-requests-message">
+							<div class="empty-state py-4">
+								<i class="fas fa-envelope-open fa-3x mb-3 text-muted"></i>
+								<p class="text-muted">Non hai richieste di amicizia in sospeso.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal per conferma rimozione amico -->
+	<div class="modal fade" 
+		 id="removeFriendModal" 
+		 tabindex="-1" 
+		 role="dialog"
+		 aria-labelledby="removeFriendModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="removeFriendModalLabel">Conferma Rimozione Amico</h5>
+					<button type="button" 
+							class="btn-close" 
+							data-bs-dismiss="modal" 
+							aria-label="Chiudi">
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>Sei sicuro di voler rimuovere <strong id="friendToRemoveName"></strong> dalla tua lista amici?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" 
+							class="btn btn-secondary" 
+							data-bs-dismiss="modal">
+						<i class="fas fa-times" aria-hidden="true"></i> 
+						<span>Annulla</span>
+					</button>
+					<button type="button" 
+							class="btn btn-danger" 
+							id="confirmRemoveFriend">
+						<i class="fas fa-user-times" aria-hidden="true"></i> 
+						<span>Rimuovi</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.friends-title {
+		font-weight: 700;
+		color: #333;
+	}
+	
+	.friends-subtitle {
+		color: #666;
+		font-size: 1.2rem;
+	}
+	
+	.card {
+		border-radius: 15px;
+		transition: all 0.3s ease;
+		border: 2px solid rgba(0,0,0,0.08);
+		overflow: hidden;
+		margin-bottom: 20px;
+	}
+	
+	.friends-card:hover,
+	.search-card:hover,
+	.requests-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+		border-color: rgba(13, 110, 253, 0.3);
+	}
+	
+	.card-header {
+		background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+		border-bottom: 1px solid rgba(0,0,0,0.08);
+	}
+	
+	.btn-hover-effect {
+		transition: all 0.3s ease;
+	}
+	
+	.btn-hover-effect:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+	}
+	
+	.empty-state {
+		padding: 30px;
+		background-color: #f8f9fa;
+		border-radius: 10px;
+	}
+	
+	/* Stili per gli elementi amico */
+	.friend-item {
+		padding: 15px;
+		border-radius: 12px;
+		transition: all 0.2s ease;
+		margin-bottom: 15px;
+		background-color: #fff;
+		border: 1px solid rgba(0,0,0,0.1);
+		display: flex;
+		align-items: center;
+	}
+	
+	.friend-item:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+	}
+	
+	.friend-avatar {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		object-fit: cover;
+		margin-right: 15px;
+	}
+	
+	.friend-info {
+		flex-grow: 1;
+	}
+	
+	.friend-name {
+		font-weight: 600;
+		margin-bottom: 2px;
+		color: #333;
+	}
+	
+	.friend-username {
+		color: #666;
+		font-size: 0.85rem;
+	}
+	
+	.friend-status {
+		font-size: 0.85rem;
+		padding: 3px 10px;
+		border-radius: 20px;
+		display: inline-block;
+	}
+	
+	.status-online {
+		background-color: rgba(25, 135, 84, 0.1);
+		color: #198754;
+	}
+	
+	.status-offline {
+		background-color: rgba(108, 117, 125, 0.1);
+		color: #6c757d;
+	}
+	
+	.friend-actions {
+		display: flex;
+		gap: 8px;
+	}
+	
+	/* Stili per le richieste di amicizia */
+	.request-item {
+		padding: 15px;
+		border-radius: 12px;
+		transition: all 0.2s ease;
+		margin-bottom: 15px;
+		background-color: #fff;
+		border: 1px solid rgba(0,0,0,0.1);
+	}
+	
+	.request-item:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+	}
+	
+	/* Stili per i risultati di ricerca */
+	.search-result {
+		padding: 15px;
+		border-radius: 12px;
+		transition: all 0.2s ease;
+		margin-bottom: 15px;
+		background-color: #fff;
+		border: 1px solid rgba(0,0,0,0.1);
+		display: flex;
+		align-items: center;
+	}
+	
+	.search-result:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+	}
+
+	/* Stili per il modal di rimozione amico */
+	#removeFriendModal .modal-content {
+		border-radius: 15px;
+		border: none;
+		box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+	}
+
+	#removeFriendModal .modal-header {
+		border-bottom: 1px solid rgba(0,0,0,0.1);
+		background-color: #f8f9fa;
+		border-radius: 15px 15px 0 0;
+	}
+
+	#removeFriendModal .modal-footer {
+		border-top: 1px solid rgba(0,0,0,0.1);
+		background-color: #f8f9fa;
+		border-radius: 0 0 15px 15px;
+	}
+
+	#removeFriendModal .modal-body {
+		padding: 2rem;
+	}
+
+	#removeFriendModal .btn {
+		padding: 0.5rem 1.5rem;
+		font-weight: 500;
+	}
+
+	#removeFriendModal .btn i {
+		margin-right: 0.5rem;
+	}
+
+	#friendToRemoveName {
+		color: #dc3545;
+	}
+</style>

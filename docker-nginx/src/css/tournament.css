@@ -1,0 +1,261 @@
+/* Stili specifici per la pagina dei tornei */
+
+/* Struttura principale */
+.tournament-list-section {
+	overflow: hidden;
+}
+
+/* Input styling unificato */
+.input-group {
+	margin-bottom: 1rem;
+}
+
+.input-group-text {
+	transition: all 0.2s ease;
+	width: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #4285f4 !important;
+	color: white !important;
+	border: none;
+}
+
+.input-group .form-control {
+	height: 42px;
+	font-size: 1rem;
+	padding: 0.5rem 0.75rem;
+	border: 1px solid var(--light-gray);
+	background-color: var(--light);
+	color: var(--text);
+	border-radius: 0 4px 4px 0 !important;
+}
+
+.input-group:hover .input-group-text {
+	background-color: #3367d6 !important;
+}
+
+.input-group-lg > .form-control {
+	font-size: 1.1rem;
+}
+
+select.form-control {
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%234285f4'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+	background-repeat: no-repeat;
+	background-position: right 0.75rem center;
+	background-size: 16px 12px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+/* Unified label styling */
+.form-label {
+	font-weight: 500 !important;
+	color: var(--text);
+	margin-bottom: 0.5rem;
+}
+
+/* Stili dei match */
+.match-col {
+	display: flex;
+	align-items: center;
+	padding: 0 0.5rem;
+}
+
+.match-player {
+	width: 35%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.match-round {
+	width: 20%;
+	justify-content: center;
+}
+
+.match-action {
+	width: 20%;
+	justify-content: flex-end;
+}
+
+.participant-field {
+	transition: all 0.2s ease;
+}
+
+/* Button enhancements */
+.btn-primary {
+	transition: all 0.2s ease;
+	letter-spacing: 0.3px;
+}
+
+.btn-primary:hover {
+	box-shadow: 0 2px 5px rgba(66, 133, 244, 0.3);
+}
+
+.end-tournament-btn:hover {
+	transform: rotate(90deg);
+}
+
+/* Tournament header enhancements */
+.tournament-header:hover {
+	background-color: rgba(66, 133, 244, 0.15);
+}
+
+/* Winner section styling */
+.winner-info {
+	align-items: center;
+}
+
+.winner-trophy {
+	width: 36px;
+	height: 36px;
+	background-color: var(--warning);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--dark);
+}
+
+/* Badge styling */
+.status-badge {
+	letter-spacing: 0.3px;
+}
+
+/* Additional hover effects */
+.btn-play:hover {
+	box-shadow: 0 2px 5px rgba(66, 133, 244, 0.3);
+	transform: translateY(-2px);
+}
+
+/* Stile coerente per i campi icona */
+.card .input-group .input-group-text {
+	border-radius: 4px 0 0 4px;
+}
+
+/* Fix per il bordo sinistro degli input */
+.input-group-text + .form-control {
+	border-left: 0;
+}
+
+/* Override di Bootstrap per l'aspetto degli input */
+.form-control:focus {
+	box-shadow: 0 0 0 0.25rem rgba(66, 133, 244, 0.25);
+	border-color: #4285f4;
+}
+
+/* Fix specifico per i campi del torneo */
+form#tournament-form .input-group-text,
+.participant-field .input-group-text {
+	background-color: #4285f4 !important;
+	color: white !important;
+}
+
+/* Stili per la sezione dei tornei completati */
+#completed-tournaments-section {
+	margin-top: 3rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid #e0e0e0;
+}
+
+#completed-tournaments-section h2 {
+	color: #6c757d;
+	font-size: 1.5rem;
+	margin-bottom: 1rem;
+}
+
+#completed-tournaments-section .fas.fa-trophy {
+	color: #ffc107;
+	margin-right: 0.5rem;
+}
+
+.completed-tournament-card {
+	background-color: #f8f9fa;
+	border-radius: 8px;
+	padding: 1rem;
+	margin-bottom: 1rem;
+	border-left: 4px solid #28a745;
+}
+
+.completed-tournament {
+	padding: 0.5rem;
+}
+
+.completed-tournament h3 {
+	font-size: 1.25rem;
+	color: #495057;
+}
+
+.winner-section {
+	margin-top: 0.5rem;
+	padding-top: 0.5rem;
+	border-top: 1px dashed #dee2e6;
+}
+
+.winner-info {
+	display: flex;
+	align-items: center;
+	color: #6c757d;
+}
+
+.winner-info strong {
+	color: #28a745;
+	font-weight: bold;
+}
+
+.fas.fa-medal {
+	font-size: 1.2rem;
+	margin-right: 0.5rem;
+}
+
+.no-completed-tournaments {
+	text-align: center;
+	padding: 2rem;
+	background-color: #f8f9fa;
+	border-radius: 8px;
+	color: #6c757d;
+}
+
+/* Tournament card styling */
+.tournament-item {
+	border-radius: 15px;
+	transition: all 0.3s ease;
+	border: 2px solid rgba(0,0,0,0.08);
+	overflow: hidden;
+	box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.tournament-item:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+	border-color: rgba(13, 110, 253, 0.3);
+}
+
+.tournament-item .btn-hover-effect {
+	transition: all 0.3s ease;
+}
+
+.tournament-item .btn-hover-effect:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.tournament-item .list-group-item {
+	transition: all 0.2s ease;
+	border: 1px solid rgba(0,0,0,0.1);
+	margin-bottom: 8px;
+	border-radius: 8px;
+}
+
+.tournament-item .list-group-item:hover {
+	background-color: rgba(13, 110, 253, 0.05);
+	transform: translateX(5px);
+}
+
+.tournament-item .badge {
+	padding: 8px 12px;
+	font-weight: 500;
+	letter-spacing: 0.3px;
+} 
