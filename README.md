@@ -64,7 +64,7 @@ docker-compose up --build
 
 ## 🌐 Accesso all'Applicazione
 
-- Frontend: [http://localhost:8443](http://localhost:8443)
+- Frontend: [https://127.0.0.1:8443](https://127.0.0.1:8443)
 
 ---
 
