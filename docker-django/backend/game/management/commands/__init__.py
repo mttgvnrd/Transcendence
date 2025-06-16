@@ -1,0 +1,1 @@
+# Questo file è necessario per fare di questa directory un pacchetto Python. 
