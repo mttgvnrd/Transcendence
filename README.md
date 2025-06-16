@@ -98,7 +98,7 @@ ft_transcendence/
 ![Homepage](./screenshots/Home.png)
 
 ### 🏆 Lobby del Torneo
-![Lobby](./screenshots/Torne.png)
+![Lobby Torneo](./screenshots/Torneo.png)
 
 ### 🎮 Profile
 ![Profile](./screenshots/Profilo.png)
