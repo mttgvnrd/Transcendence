@@ -504,9 +504,6 @@ async function createOngoingTournamentHtml(tournament) {
 						</p>
 					</div>
 					<div>
-						<a href="/tournament/${tournament.id}/" class="btn btn-outline-primary btn-hover-effect">
-							<i class="fas fa-eye me-1"></i>View Bracket
-						</a>
 						${userCurrentMatch && playableMatches.has(userCurrentMatch.id) ? `
 						<button class="btn btn-success ms-2 btn-hover-effect play-match-btn" 
 								data-tournament-id="${tournament.id}"
@@ -747,11 +744,6 @@ function createCompletedTournamentHtml(tournament) {
 							<i class="fas fa-crown text-warning me-2"></i>
 							Winner: <span class="fw-bold ms-1">${tournament.winner_nickname || 'Not available'}</span>
 						</div>
-					</div>
-					<div>
-						<a href="/tournament/${tournament.id}/" class="btn btn-outline-primary btn-hover-effect">
-							<i class="fas fa-eye me-1"></i>View Results
-						</a>
 					</div>
 				</div>
 			</div>

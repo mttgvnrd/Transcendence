@@ -33,18 +33,12 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost', 
     '127.0.0.1',
-    '10.12.1.12',
-    '10.12.2.10',
-    '172.20.10.5',
     'nginx',  # Allow requests from the Nginx container
     'django',  # Allow requests from the Django container name
     os.environ.get('IP_HOST', ''),  # Get IP_HOST from environment variables
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "https://localhost:8443",
-    "http://localhost:8080",
-]
+CORS_ALLOW_ALL_ORIGINS = False
 
 # Impostazioni di sicurezza
 SECURE_BROWSER_XSS_FILTER = True

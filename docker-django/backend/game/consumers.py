@@ -927,9 +927,11 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
 						match.score_player_2 = player2_score
 						match.winner = match.player_1 if player1_score > player2_score else match.player_2
 					else:
+						# Se i giocatori sono invertiti, invertiamo anche i punteggi
 						match.score_player_1 = player2_score
 						match.score_player_2 = player1_score
-						match.winner = match.player_1 if player2_score > player1_score else match.player_2
+						# Correggiamo la logica del vincitore quando i giocatori sono invertiti
+						match.winner = match.player_2 if player1_score > player2_score else match.player_1
 					
 					logger.error(f"[TOURNAMENT UPDATE] Impostazione punteggi: {match.score_player_1}-{match.score_player_2}, vincitore: {match.winner.nickname}")
 					
